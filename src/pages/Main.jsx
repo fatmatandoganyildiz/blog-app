@@ -3,18 +3,22 @@ import requests from "../request";
 
 function Main() {
   const [images, setImages] = useState([]);
-  const image = images[Math.floor(Math.random() * images.width)]
+  // const image = images[Math.floor(Math.random() * images.width)]
 
-  const fetchImages = async ()=>{
-    const response = await fetch(
-      requests.requestMain
-    );
+  const fetchImages = async () => {
+    const response = await fetch(requests.requestMain);
+    
     const data = await response.json();
-    setImages(data.results.url);
-  }
+    console.log(data);
+    setImages(
+      data.map((e) => {
+        return e.urls.small;
+      })
+    );
+  };
 
   useEffect(() => {
-    fetchImages()
+    fetchImages();
   }, []);
 
   return (
@@ -22,7 +26,7 @@ function Main() {
       <div className="border w-3/4">
         <img
           className="w-full h-[450px] object-cover"
-          src={`https://image.unsplash.com/${}`}
+          src={`${images[0]}`}
           alt="main-pic"
         />
       </div>
@@ -30,7 +34,7 @@ function Main() {
         <div className="border">
           <img
             className="w-full h-[225px] object-cover"
-            src={}
+            src={`${images[1]}`}
             alt="pic"
           />
         </div>
@@ -38,7 +42,7 @@ function Main() {
           {" "}
           <img
             className="w-full h-[225px] object-cover"
-            src={}
+            src={`${images[2]}`}
             alt="pic-2"
           />
         </div>
