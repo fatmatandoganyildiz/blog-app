@@ -3,23 +3,35 @@ import requests from "../request";
 
 function Main() {
   const [images, setImages] = useState([]);
-  // const image = images[Math.floor(Math.random() * images.width)]
-
-  const fetchImages = async () => {
-    const response = await fetch(requests.requestMain);
-    
-    const data = await response.json();
-    console.log(data);
-    setImages(
-      data.map((e) => {
-        return e.urls.small;
-      })
-    );
-  };
 
   useEffect(() => {
     fetchImages();
   }, []);
+
+  const fetchImages = async () => {
+    // const check = localStorage.getItem("images");
+
+    // if (check) {
+    //   setImages(JSON.parse(check));
+    // } else {
+      const response = await fetch(requests.requestMain);
+
+      const data = await response.json();
+      // console.log(data);
+      // localStorage.setItem(
+      //   "images",
+      //   JSON.stringify(
+      //     data.urls.small
+      //   )
+      // );
+
+      setImages(
+        data.map((e) => {
+          return e.urls.small;
+        })
+      );
+    // }
+  };
 
   return (
     <div className="flex flex-row mx-14 my-12 gap-4">
@@ -30,7 +42,7 @@ function Main() {
           alt="main-pic"
         />
       </div>
-      <div className=" border w-1/4">
+      <div className=" border w-1/4 gap-2">
         <div className="border">
           <img
             className="w-full h-[225px] object-cover"

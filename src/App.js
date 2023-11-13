@@ -6,6 +6,8 @@ import Account from "./pages/Account";
 import Health from "./pages/Health";
 import LifeStyle from "./pages/LifeStyle";
 import Travel from './pages/Travel';
+import ModalPage from "./pages/ModalPage";
+import Article from "./pages/Article";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/health" element={<Health />} />
           <Route path="/lifestyle" element={<LifeStyle />} />
           <Route path="/travel" element={<Travel />} />
+          <Route path="/modal" element={<ModalPage />} />
+          <Route path="/article/:name" element={<Article/>}/>
         </Routes>
       </BrowserRouter>
     </div>

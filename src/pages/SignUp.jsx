@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   return (
@@ -31,7 +31,14 @@ function SignUp() {
                 </div>
                 <p className="py-4">
                   <span>Already have a account?</span>{" "}
-                  <Link to="/login" className="font-bold">Sign In</Link>
+                  <Link to="/login" className="font-bold">
+                    Sign In
+                  </Link>
+                </p>
+                <p className="py-4">
+                  <Link to="/modal" className="font-bold border px-2 py-1 rounded-md">
+                  Read User Agreement
+                  </Link>
                 </p>
               </form>
             </div>
@@ -39,7 +46,7 @@ function SignUp() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
