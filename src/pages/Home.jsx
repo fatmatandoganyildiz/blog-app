@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [images, setImages] = useState([]);
-  const [desc, setDesc] = useState([]);
+  const [id, setId] = useState("");
   const [altdesc, setAltdesc] = useState([]);
 
   const image = images[Math.floor(Math.random() * 12)];
@@ -17,18 +17,20 @@ function Home() {
 
     const data = await response.json();
     console.log(data);
+    console.log(data.blur_hash);
+
     setImages(
       data.map((e) => {
         return e.urls.small;
       })
     );
 
-    setDesc(
+    setId(
       data.map((d) => {
-        return d.current_user_collections.description;
+        return d.exif.id;
       })
     );
-    console.log(desc);
+    console.log(id);
 
     setAltdesc(
       data.map((a) => {
@@ -52,13 +54,13 @@ function Home() {
             <Link to={"/article/" + image.id}>
               <div className="border ">
                 <img
-                  key={id}
+                  key={image.id}
                   className="w-[560px] h-[200px] border object-cover "
                   src={`${image}`}
                   alt="alt"
                 />
-                <h4 className="text-2xl my-2">{`${desc[id]}`}</h4>
-                <p className="ml-1">{`${altdesc[id]}`}</p>
+                {/* <h4 className="text-2xl my-2"  key={image.id}>{`${desc[id]}`}</h4> */}
+                <p className="ml-1" key={image.id}>{`${altdesc[id]}`}</p>
               </div>
             </Link>
           ))}
