@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { key } from "../request";
+
 function Article() {
   let params = useParams();
 
@@ -15,6 +16,7 @@ function Article() {
           `
         );
         const detailData = await data.json();
+        console.log(detailData);
         setDetails(detailData);
       };
       fetchDetails();
@@ -23,13 +25,13 @@ function Article() {
 
   return (
     <div>
-      {/* <img
+       <img
         key={details.current_user_collections}
         className="w-[560px] h-[200px] border object-cover "
         src={`${details.urls}`}
         alt="alt"
       />
-       <h4 className="text-2xl my-2" key={details.id}>{`${details.current_user_collections.description}`}</h4> */}
+       {/* <h4 className="text-2xl my-2" key={details.id}>{`${details.current_user_collections.description}`}</h4>  */}
       <p className="ml-1">{`${details}`}</p> 
     </div>
   );

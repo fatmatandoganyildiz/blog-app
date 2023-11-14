@@ -1,4 +1,4 @@
-const key = "LqQy71rtWUIaH9uKnNkFGdYEt-AU4inLXg7_L-Mu6gk"
+const key = "1b5ebD6_vLuzBdszW-wAZ5J8TYuJn-7OB4dXVVAzSlQ"
 
 const requests = {
   requestHome: `https://api.unsplash.com/photos/random?query=home&count=12&client_id=${key}`,
