@@ -1,54 +1,77 @@
 import React, { useState, useEffect } from "react";
 import Main from "./Main";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
 import requests from "../request";
 import { Link } from "react-router-dom";
 
 function Home() {
-  // const [images, setImages] = useState([]);
+  const [imageHome, setImagesHome] = useState([]);
   // const [id, setId] = useState("");
-  // const [altDesc, setAltdesc] = useState([]);
+  const [altDesc, setAltdesc] = useState([]);
 
-  // // const image = images[Math.floor(Math.random() * 12)];
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  const fetchImages = async () => {
+    const storagedImages = localStorage.getItem("imageHome");
+
+    if (storagedImages) {
+      const imageUrl = JSON.parse(storagedImages);
+      setImagesHome(imageUrl);
+    } else {
+      const response = await fetch(requests.requestHome);
+      const datas = await response.json();
+      console.log(datas);
+
+      setImagesHome(
+        localStorage.setItem(
+          "imageHome",
+          JSON.stringify(datas.map((e) => e.urls.small))
+        )
+      );
+
+      // setAltdesc(
+      //   datas.map((a) => {
+      //     return a.alt_description;
+      //   })
+      // );
+    }
+  };
 
   // const fetchImages = async () => {
-  //   const storedData = localStorage.getItem("storedData");
+  //   const storagedImages = localStorage.getItem("imageHome");
 
-  //   if (storedData) {
-  //     const data = JSON.parse(storedData);
-  //     setImages(data.images);
-  //     setAltdesc(data.altDesc);
+  //   if (storagedImages) {
+  //     const imageUrl = JSON.parse(storagedImages);
+  //     setImagesHome(imageUrl);
   //   } else {
   //     const response = await fetch(requests.requestHome);
-  //     const data = await response.json();
-      
-  //     setImages(
-  //       data.map((e) => {
-  //         return e.urls.small;
-  //       })
+  //     const datas = await response.json();
+  //     console.log(datas);
+
+  //     setImagesHome(
+  //       localStorage.setItem(
+  //         "imageHome",
+  //         JSON.stringify(datas.map((e) => e.urls.small))
+  //       )
   //     );
 
-  //     setAltdesc(
-  //       data.map((a) => {
-  //         return a.alt_description;
-  //       })
-  //     );
+  //     // setAltdesc(
+  //     //   datas.map((a) => {
+  //     //     return a.alt_description;
+  //     //   })
+  //     // );
   //   }
   // };
 
-  // useEffect(() => {
-  //   fetchImages();
-  // }, []);
+  //   // // const image = images[Math.floor(Math.random() * 12)];
 
   return (
     <div>
-      <Header />
-      <Navbar />
       <Main />
-      {/* <div className="mx-14 my-12 justify-items-center border">
+      <div className="mx-14 my-12 justify-items-center border">
         <div className="border grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {images.map((image, id) => (
+          {imageHome.map((image, id) => (
             <Link to={"/article/" + image[id]}>
               <div className="border">
                 <img
@@ -57,13 +80,13 @@ function Home() {
                   src={`${image}`}
                   alt="alt"
                 />
-                {/* <h4 className="text-2xl my-2"  key={image.id}>{`${desc[id]}`}</h4> */}
-                {/* <p className="ml-1" key={image.id}>{`${altDesc[id]}`}</p>
-              </div> */}
-            {/* </Link> */}
-          {/* ))} */}
-        {/* </div> */}
-      {/* </div> */} */
+                {/* <h4 className="text-2xl my-2"  key={image.id}>{`${desc[id]}`}</h4>  */}
+                <p className="ml-1" key={image.id}>{`${altDesc[id]}`}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

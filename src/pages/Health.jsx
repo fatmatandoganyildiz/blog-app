@@ -4,48 +4,46 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 
 function Health() {
-  const [images, setImages] = useState([]);
-  const [desc, setDesc] = useState([]);
-  const [altdesc, setAltdesc] = useState([]);
+  // const [images, setImages] = useState([]);
+  // const [desc, setDesc] = useState([]);
+  // const [altdesc, setAltdesc] = useState([]);
 
-  const image = images[Math.floor(Math.random() * 12)];
+  // const image = images[Math.floor(Math.random() * 12)];
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  // useEffect(() => {
+  //   fetchImages();
+  // }, []);
 
-  const fetchImages = async () => {
-    const response = await fetch(requests.requestHealth);
+  // const fetchImages = async () => {
+  //   const response = await fetch(requests.requestHealth);
 
-    const data = await response.json();
-    setImages(
-      data.map((e) => {
-        return e.urls.small;
-      })
-    );
-    // console.log(data);
+  //   const data = await response.json();
+  //   setImages(
+  //     data.map((e) => {
+  //       return e.urls.small;
+  //     })
+  //   );
+  //   // console.log(data);
 
-    setDesc(
-      data.map((d) => {
-        return d.current_user_collections.description;
-      })
-    );
-    console.log(desc);
+  //   setDesc(
+  //     data.map((d) => {
+  //       return d.current_user_collections.description;
+  //     })
+  //   );
+  //   console.log(desc);
 
-    setAltdesc(
-      data.map((a) => {
-        return a.alt_description;
-      })
-    );
-  };
+  //   setAltdesc(
+  //     data.map((a) => {
+  //       return a.alt_description;
+  //     })
+  //   );
+  // };
   return (
     <>
-      <Header />
-      <Navbar />
       <h1 className="text-center my-16 mx-16 text-6xl font-extralight tracking-widest">
         HEALTH{" "}
       </h1>
-      <div className="mx-16 my-16">
+      {/* <div className="mx-16 my-16">
         <div>
           <img
             className="w-full h-[240px] object-cover"
@@ -69,8 +67,8 @@ function Health() {
           ))}
         </div>
         </div>
-  
-      </div>
+   */}
+      {/* </div> */}
 
     </>
   );
