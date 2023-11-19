@@ -72,8 +72,8 @@ function Home() {
       <div className="mx-14 my-12 justify-items-center border">
         <div className="border grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {imageHome.map((image, id) => (
-            <Link to={"/article/" + image[id]}>
-              <div className="border">
+            <Link to={"/article/" + image[id]} key={image.id}>
+              <div className="border" key={image.id}>
                 <img
                   key={image.id}
                   className="w-[560px] h-[200px] border object-cover "

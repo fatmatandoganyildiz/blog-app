@@ -11,6 +11,7 @@ import Article from "./pages/Article";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import { AuthContextProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -24,7 +25,14 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/account" element={<Account />} />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <Account />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/health" element={<Health />} />
             <Route path="/lifestyle" element={<LifeStyle />} />
             <Route path="/travel" element={<Travel />} />

@@ -3,19 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import { useState } from "react";
 
-function LogIn() {
+const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { user, logIn } = UserAuth();
+  const[error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       await logIn(email, password);
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
+      setError(error.message);
     }
   };
   return (
@@ -25,6 +28,7 @@ function LogIn() {
           <div className="max-w-[450px] h-[550px] mx-auto bg-black/60 text-white rounded-lg py-2">
             <div className="max-w-[350px] mx-auto my-7 py-16 px-2 bg-stone-500 rounded-sm">
               <h1 className="text-2xl font-light text-center">SIGN IN</h1>
+              {error ? <p className="p-3 bg-red-500 my-3">{error}</p>:null}
               <form
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col justify-items-center"
@@ -37,7 +41,7 @@ function LogIn() {
                   autoComplete="email"
                 />
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="p-3 my-2 rounded-md  text-gray-950"
                   placeholder="Password"
                   type="password"
