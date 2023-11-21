@@ -2,7 +2,9 @@ import React from 'react'
 
 function Travel() {
   return (
-    <div>Travel</div>
+    <div><h1 className="text-center my-16 mx-16 text-6xl font-extralight tracking-widest">
+    TRAVEL{" "}
+  </h1></div>
   )
 }
 

@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Write from "./pages/Write";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Account />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/write"
+              element={
+                <ProtectedRoute>
+                  <Write />
                 </ProtectedRoute>
               }
             />

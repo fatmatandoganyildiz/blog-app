@@ -38,6 +38,9 @@ function Header() {
           <Link to="/account">
             <button className="text-black cursor-pointer">Account</button>
           </Link>
+          <Link to="/write">
+            <button className="text-black cursor-pointer bg-red-700">Write</button>
+          </Link>
           <button
             onClick={handleLogout}
             className="bg-black text-white cursor-pointer ml-1 px-1 rounded-sm"
