@@ -1,6 +1,4 @@
 import React from 'react'
-import { SlPlus } from "react-icons/sl";
-
 function Write() {
 
     return (

@@ -11,6 +11,7 @@ function Header() {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
 
+
   const handleLogout = async () => {
     try {
       await logOut();
@@ -33,33 +34,41 @@ function Header() {
           BLOG
         </p>
       </Link>
-      {user?.email ? (
-        <div className="px-4 py-2">
-          <Link to="/account">
-            <button className="text-black cursor-pointer">Account</button>
-          </Link>
-          <Link to="/write">
-            <button className="text-black cursor-pointer bg-red-700">Write</button>
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="bg-black text-white cursor-pointer ml-1 px-1 rounded-sm"
-          >
-            Log Out
-          </button>
-        </div>
-      ) : (
-        <div className="px-4 py-2">
-          <Link to="/login">
-            <button className="text-black cursor-pointer">Sign In</button>
-          </Link>
-          <Link to="/signup">
-            <button className="bg-black text-white cursor-pointer ml-1 px-1 rounded-sm">
-              Sign Up
+      <div className="flex flex-row">
+        {/* <div className="mt-2">
+          <SearchBar onSubmit = {handleSubmit}/>
+          <SearchResult term={seacrhTerm}/>
+        </div> */}
+        {user?.email ? (
+          <div className="px-4 py-2">
+            <Link to="/account">
+              <button className="text-black cursor-pointer">Account</button>
+            </Link>
+            <Link to="/write">
+              <button className="text-black cursor-pointer bg-red-700">
+                Write
+              </button>
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="bg-black text-white cursor-pointer ml-1 px-1 rounded-sm"
+            >
+              Log Out
             </button>
-          </Link>
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="px-4 py-2">
+            <Link to="/login">
+              <button className="text-black cursor-pointer">Sign In</button>
+            </Link>
+            <Link to="/signup">
+              <button className="bg-black text-white cursor-pointer ml-1 px-1 rounded-sm">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
