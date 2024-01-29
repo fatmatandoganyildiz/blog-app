@@ -14,14 +14,12 @@ import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Write from "./admin/Write";
 import Footer from "./components/Footer";
-import Help from '../src/footerComponents/Help';
-import Status from '../src/footerComponents/Status';
-import About from '../src/footerComponents/About';
-import Careers from '../src/footerComponents/Careers';
-import Blog from '../src/footerComponents/Blog';
-import Privacy from '../src/footerComponents/Privacy';
-import Terms from '../src/footerComponents/Terms';
-import Teams from '../src/footerComponents/Teams';
+import Help from "./components/Footer-Components/footerComponents/Help";
+import Contact from "../src/components/Footer-Components/footerComponents/Contact";
+import About from "../src/components/Footer-Components/footerComponents/About";
+import Careers from "../src/components/Footer-Components/footerComponents/Careers/Careers";
+import Terms from "../src/components/Footer-Components/footerComponents/Terms";
+import Teams from "../src/components/Footer-Components/footerComponents/Teams";
 
 function App() {
   return (
@@ -57,11 +55,9 @@ function App() {
             <Route path="/modal" element={<ModalPage />} />
             <Route path="/article/:id" element={<Article />} />
             <Route path="/help" element={<Help />} />
-            <Route path="/status" element={<Status />} />  
+            <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/teams" element={<Teams />} />
           </Routes>

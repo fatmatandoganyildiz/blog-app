@@ -7,6 +7,8 @@ const requests = {
   requestTravel: `https://api.unsplash.com/photos/random?query=travel&count=8&client_id=${key}`,
   requestMain: `https://api.unsplash.com/photos/random?query=minimalist&count=3&client_id=${key}`,
   requestHelpPagePhoto: `https://api.unsplash.com/photos/random?query=questions&count=1&client_id=${key}`,
+  requestCareers: `https://api.unsplash.com/photos/random?query=careers&count=8&client_id=${key}`,
+
 };
 
 export default requests;

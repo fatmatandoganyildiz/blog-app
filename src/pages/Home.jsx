@@ -3,35 +3,43 @@ import Main from "./Main";
 import requests from "../request";
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
+import FetchDataBase from "../fetchingDatas/fetchDataBase";
 
-function Home() {
-  // const [data, setData] = useState([]);
-  // const [id, setId] = useState([]);
+function Home({ onDataBisiler }) {
+  const [data, setData] = useState([]);
+  const [id, setId] = useState([]);
 
-  // useEffect(() => {
-  //   fetchImages();
-  // }, []);
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
-  // const fetchImages = async () => {
-  //   const storagedData = localStorage.getItem("dataHome");
+  const fetchImages = async () => {
+    const storagedData = localStorage.getItem("dataHome");
 
-  //   if (storagedData) {
-  //     const datas = JSON.parse(storagedData);
-  //     setData(datas);
-  //   } else {
-  //     const response = await fetch(requests.requestHome);
-  //     const datas = await response.json();
-  //     setData(
-  //       localStorage.setItem("dataHome", JSON.stringify(datas?.map((e) => e)))
-  //     );
-  //     setId(datas?.map((e) => e.id));
-  //   }
-  // };
+    if (storagedData) {
+      const datas = JSON.parse(storagedData);
+      setData(datas);
+      console.log(datas);
+    } else {
+      const response = await fetch(requests.requestHome);
+      const datas = await response.json();
+      setData(
+        localStorage.setItem("dataHome", JSON.stringify(datas?.map((e) => e)))
+      );
+      setId(datas?.map((e) => e.id));
+    }
+  };
 
+  
   return (
     <div>
-      <SearchBar/>
+      <SearchBar />
       <Main />
+      {/* <FetchDataBase
+        storagedName={storagedName}
+        requestAdress={requestAdress}
+       
+      /> */}
       <div className="my-12">
         <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {data?.map((d) => {

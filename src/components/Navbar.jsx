@@ -7,7 +7,7 @@ function Navbar() {
   // console.log(user);
   return (
     <div>
-      <ul className="flex flex-row justify-evenly my-3">
+      <ul className="flex flex-row justify-evenly my-3 bg-white">
         <Link to="/">
           <li>HOME</li>
         </Link>

@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    font-family: 'Catamaran', sans-serif
+* {
+  font-family: "Catamaran", sans-serif;
 }
