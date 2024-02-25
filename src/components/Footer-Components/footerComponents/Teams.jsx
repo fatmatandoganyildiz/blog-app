@@ -71,7 +71,7 @@ function Teams() {
                     href="#"
                     class="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white"
                     aria-label="Github"
-                  >
+                    >
                     <svg
                       class="w-6 h-6 fill-current"
                       viewBox="0 0 24 24"

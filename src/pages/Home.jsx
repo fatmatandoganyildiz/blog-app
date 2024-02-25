@@ -1,64 +1,67 @@
-import React, { useState, useEffect } from "react";
-import Main from "./Main";
-import requests from "../request";
+import React, { useEffect, useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { db, storage } from "../firebase";
+import { getDownloadURL, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
-import SearchBar from "../components/SearchBar";
-import FetchDataBase from "../fetchingDatas/fetchDataBase";
 
-function Home({ onDataBisiler }) {
-  const [data, setData] = useState([]);
-  const [id, setId] = useState([]);
+function Home() {
+  const [postLists, setPostList] = useState([]);
+  const postsCollectionRef = collection(db, "posts");
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
-  const fetchImages = async () => {
-    const storagedData = localStorage.getItem("dataHome");
-
-    if (storagedData) {
-      const datas = JSON.parse(storagedData);
-      setData(datas);
-      console.log(datas);
-    } else {
-      const response = await fetch(requests.requestHome);
-      const datas = await response.json();
-      setData(
-        localStorage.setItem("dataHome", JSON.stringify(datas?.map((e) => e)))
+  const getPosts = async () => {
+    try {
+      const data = await getDocs(postsCollectionRef);
+      const posts = await Promise.all(
+        data.docs.map(async (doc) => {
+          const postData = doc.data();
+          const imageUrl = await getDownloadURL(ref(storage, postData.image));
+          return {
+            ...postData,
+            id: doc.id,
+            imageUrl,
+          };
+        })
       );
-      setId(datas?.map((e) => e.id));
+
+      setPostList(posts);
+    } catch (error) {
+      console.error("Error getting posts: ", error);
     }
   };
 
-  
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
-    <div>
-      <SearchBar />
-      <Main />
-      {/* <FetchDataBase
-        storagedName={storagedName}
-        requestAdress={requestAdress}
-       
-      /> */}
-      <div className="my-12">
-        <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {data?.map((d) => {
-            return (
-              <div key={d.id}>
-                <Link to={`/article/${d.id}`}>
-                  <div className="border bg-stone-100">
-                    <img
-                      className="w-[560px] h-[200px] border object-cover"
-                      src={d.urls.regular}
-                      alt="alt"
-                    />
-                    <h4 className="text-xl my-2 font-light tracking-wider font-serif">{`${d.user?.username}`}</h4>
-                  </div>
-                </Link>
+    <div className="container mx-auto px-4">
+      <h1 className="text-center my-16 text-6xl font-extralight tracking-widest">
+        HOME
+      </h1>{" "}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {postLists.map((post) => (
+          <div
+            className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
+            key={post.id}
+          >
+            <Link to={`/article/${post.id}`}>
+              <img
+                className="w-full h-48 object-cover"
+                src={post.imageUrl}
+                alt={post.title}
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                <p className="text-gray-700">
+                  {post.postText.slice(0, 100)}...
+                </p>
+                <div className="mt-4 flex justify-between items-center">
+                  <span className="text-gray-600">{post.author.name}</span>
+                </div>
               </div>
-            );
-          })}
-        </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );

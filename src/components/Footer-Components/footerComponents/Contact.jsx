@@ -19,7 +19,7 @@ function Contact() {
             // marginheight="0"
             // marginwidth="0"
             title="map"
-            src="https://maps.google.com/maps?width=100%&height=100%&hl=en&q=Izmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
+            src="https://maps.google.com/maps?width=100%&height=100%&hl=en&q=Adana+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
           ></iframe>
         </div>
         <div className="container px-5 py-24 mx-auto flex">
@@ -27,12 +27,12 @@ function Contact() {
             <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
               Contact Us
             </h2>
-            <p class="leading-relaxed mb-5 text-gray-600">
+            <p className="leading-relaxed mb-5 text-gray-600">
               Feel free to reach out to us with any questions, feedback, or
               inquiries.
             </p>
             <div className="relative mb-4">
-              <label for="email" className="leading-7 text-sm text-gray-600">
+              <label htmlFor="email" className="leading-7 text-sm text-gray-600">
                 Email
               </label>
               <input
@@ -45,8 +45,8 @@ function Contact() {
                 placeholder="Your Email"
               />
             </div>
-            <div class="relative mb-4">
-              <label for="message" class="leading-7 text-sm text-gray-600">
+            <div className="relative mb-4">
+              <label htmlFor="message" className="leading-7 text-sm text-gray-600">
                 Message
               </label>
               <textarea

@@ -1,65 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { key } from "../request";
+import { Link, useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 function Article() {
   let params = useParams();
-  const [details, setDetails] = useState({});
+  const [post, setPost] = useState({});
 
   useEffect(() => {
-    if (params.id) {
-      const fetchDetails = async () => {
-        try {
-          const response = await fetch(
-            `https://api.unsplash.com/photos/${params.id}?client_id=${key}`
-          );
-          if (!response.ok) {
-            throw new Error("Photo not found");
-          }
-          const detailData = await response.json();
-          console.log(detailData);
-          setDetails(detailData);
-        } catch (error) {
-          console.error("Error fetching photo details:", error.message);
+    
+    const fetchData = async () => {
+      if (params.id) {
+        const docRef = doc(db, "posts", `${params.id}`);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+          setPost(docSnap.data());
+        } else {
+          console.log("No such document!");
         }
-      };
-      fetchDetails();
-    }
+      }else{
+        console.log("Makale bulunamadi")
+      }
+    };
 
+    fetchData();
   }, [params.id]);
 
-  const truncateString = (str, num) => {
-    if(str?.length > num){
-      return str.slice(0,num) + "..."
-    } else{
-      return str;
-    }
-  }
-
   return (
-    <div className=" grid justify-center">
-      <div className="bg-stone-300 grid justify-center px-10 py-10 my-40">
-        {details?.description && (
-          <h2 className="text-3xl font-light justify-center tracking-wider font-serif mb-2 text-center">
-            {truncateString(details.alt_description,20)}
+    <div className="flex justify-center min-w-screen min-h-screen bg-gray-100">
+      <div className="bg-white p-10 my-16 max-w-2xl w-full rounded-md shadow-md h-auto">
+        {post && (
+          <h2 className="text-3xl font-semibold mb-4 font-serif text-left">
+            {post.title}
           </h2>
         )}
-        <div className="grid justify-center mt-2">
-          {" "}
-          {details?.urls && (
+        {post?.author?.name && (
+          <h2 className="font-serif flex">
+            <p className="font-semibold">Author: </p>
+            <Link to={`/authorPage/${post.author.id}`} className="hover:underline ml-2">{post.author.name}</Link>
+          </h2>
+        )}
+        <div className="mt-6">
+          {post?.image && (
             <img
-              className="w-[550px] h-[350px] object-cover"
-              src={details.urls.regular}
-              alt={details.alt_description}
+              className="w-full h-auto rounded-md shadow-md"
+              src={post.image}
+              alt={post.image}
             />
           )}
-          {details?.user?.first_name && (
-            <h2 className="text-2xl font-light tracking-wider font-serif">
-              {details.user.first_name}
-            </h2>
-          )}
-          <p>{truncateString(details?.description, 70)}</p>
         </div>
+        <p className="mt-6 text-gray-800">{post?.postText}</p>
       </div>
     </div>
   );

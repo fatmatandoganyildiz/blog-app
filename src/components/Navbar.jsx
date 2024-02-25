@@ -1,10 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { UserAuth } from "../context/AuthContext";
 
 function Navbar() {
-  // const { user, logOut } = UserAuth();
-  // console.log(user);
+
   return (
     <div>
       <ul className="flex flex-row justify-evenly my-3 bg-white">

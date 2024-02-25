@@ -40,8 +40,8 @@ import { helpContent } from "../../../store/footerContents";
               : e.Question.toLowerCase().includes(searchTerm) ||
                   e.Response.toLowerCase().includes(searchTerm);
           })
-          .map((e) => (
-            <div key={e.id} className="my-6 mx-2">
+          .map((e, index) => (
+            <div key={index} className="my-6 mx-2">
               <div className="font-bold">{e.Question}</div>
               <div>{e.Response}</div>
             </div>

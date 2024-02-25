@@ -1,72 +1,68 @@
 import React, { useEffect, useState } from "react";
-import requests from "../request";
 import { Link } from "react-router-dom";
-import Article from "./Article";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db, storage } from "../firebase";
+import { getDownloadURL, ref } from "firebase/storage";
 
-function LifeStyle() {
-  const [data, setData] = useState([]);
-  const [id, setId] = useState([]);
+function Health() {
+  const [postList, setPostList] = useState([]);
+  const postsCollectionRef = collection(db, "posts");
 
-  useEffect(() => {
-    fetchImages();
-  }, []);
-
-  const fetchImages = async () => {
-    const storagedData = localStorage.getItem("dataLife-Style");
-
-    if (storagedData) {
-      const datas = JSON.parse(storagedData);
-      setData(datas);
-    } else {
-      const response = await fetch(requests.requestLifestyle);
-      const datas = await response.json();
-      setData(
-        localStorage.setItem(
-          "dataLife-Style",
-          JSON.stringify(datas?.map((e) => e))
-        )
+  const getPosts = async () => {
+    try {
+      const data = await getDocs(query(postsCollectionRef, where("categories", "array-contains", "Life-Style")));
+      const posts = await Promise.all(
+        data.docs.map(async (doc) => {
+          const postData = doc.data();
+          const imageUrl = await getDownloadURL(ref(storage, postData.image));
+          return {
+            ...postData,
+            id: doc.id,
+            imageUrl,
+          };
+        })
       );
-      setId(datas?.map((e) => e.id));
+
+      setPostList(posts);
+    } catch (error) {
+      console.error("Error getting posts: ", error);
     }
   };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
-    <>
-      <h1 className="text-center my-16 mx-16 text-6xl font-extralight tracking-widest">
-        LIFE-STYLE{" "}
+    <div className="mx-16 my-16">
+      <h1 className="text-center my-16 text-6xl font-extralight tracking-widest">
+        LIFE-STYLE
       </h1>
-      <div className="mx-16 my-16">
-        {/* <div>
-          <img
-            className="w-full h-[240px] object-cover"
-            src={`${images[0]}`}
-            alt="pic"
-          />
-        </div> */}
-        <div className="my-12">
-          <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {data?.map((d) => {
-              console.log(d);
-              return (
-                <div key={d.id}>
-                  <Link to={`/article/${d.id}`}>
-                    <div className="border bg-stone-100">
-                      <img
-                        className="w-[560px] h-[200px] border object-cover"
-                        src={d.urls.small}
-                        alt="alt"
-                      />
-                      <h4 className="text-xl my-2 font-light tracking-wider font-serif">{`${d.user?.username}`}</h4>
-                    </div>
-                  </Link>
-                  {/* <Article key={d.id} d={d} /> */}
+      <div className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center p-8">
+        {postList.map((post) => (
+          <div
+            className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
+            key={post.id}
+          >
+            <Link to={`/article/${post.id}`}>
+              <img
+                className="w-full h-48 object-cover"
+                src={post.imageUrl}
+                alt={post.title}
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+                <p className="text-gray-700">{post.postText.slice(0,100)}...</p>
+                <div className="mt-4 flex justify-between items-center">
+                  <span className="text-gray-600">{post.author.name}</span>
                 </div>
-              );
-            })}
+              </div>
+            </Link>
           </div>
-        </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
-export default LifeStyle;
+export default Health;

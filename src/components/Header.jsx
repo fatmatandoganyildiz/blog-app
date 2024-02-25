@@ -11,7 +11,6 @@ function Header() {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
 
-
   const handleLogout = async () => {
     try {
       await logOut();
@@ -20,7 +19,6 @@ function Header() {
       console.log(error);
     }
   };
-  // console.log(user.email);
 
   return (
     <div className="border flex flex-row  justify-between">
@@ -35,17 +33,15 @@ function Header() {
         </p>
       </Link>
       <div className="flex flex-row">
-        {/* <div className="mt-2">
-          <SearchBar onSubmit = {handleSubmit}/>
-          <SearchResult term={seacrhTerm}/>
-        </div> */}
         {user?.email ? (
           <div className="px-4 py-2">
-            <Link to="/account">
-              <button className="text-black cursor-pointer">Account</button>
+            <Link to="/myposts">
+              <button className="bg-blue-500 text-white cursor-pointer ml-1 px-1 rounded-sm">
+                Account
+              </button>
             </Link>
             <Link to="/write">
-              <button className="text-black cursor-pointer bg-red-700">
+              <button className="bg-pink-500 text-white cursor-pointer ml-1 px-1 rounded-sm">
                 Write
               </button>
             </Link>

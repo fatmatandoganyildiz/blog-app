@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { getDocs, collection, query, where, doc } from "firebase/firestore";
+import { db, storage, auth } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
+import { Link } from "react-router-dom";
 
-function Health() {
-  const [postList, setPostList] = useState([]);
+function MyPosts() {
+  const [postLists, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
-  const getPosts = async () => {
+  const currentUser = auth.currentUser;
+  const currentUserUId = currentUser ? currentUser.uid : null;
+
+  const getPosts = async (currentUserUId) => {
+    if(!currentUserUId){
+      console.error("Error: User is not authenticated");
+      return;
+    }
     try {
-      const data = await getDocs(query(postsCollectionRef, where("categories", "array-contains", "Travel")));
+      const data = await getDocs(query(postsCollectionRef, where("author.id","==",currentUserUId)));
       const posts = await Promise.all(
         data.docs.map(async (doc) => {
           const postData = doc.data();
@@ -30,16 +37,16 @@ function Health() {
   };
 
   useEffect(() => {
-    getPosts();
-  }, []);
+    getPosts(currentUserUId);
+  }, [currentUserUId]);
 
   return (
     <div className="mx-16 my-16">
       <h1 className="text-center my-16 text-6xl font-extralight tracking-widest">
-        TRAVEL
+        MY POSTS
       </h1>
-      <div className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center p-8">
-        {postList.map((post) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center p-8">
+        {postLists.map((post) => (
           <div
             className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
             key={post.id}
@@ -65,4 +72,4 @@ function Health() {
   );
 }
 
-export default Health;
+export default MyPosts;

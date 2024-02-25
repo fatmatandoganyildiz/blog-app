@@ -5,27 +5,28 @@ function Footer() {
   return (
     <footer className="fixed bottom-0 w-full bg-white">
       <ul className="flex flex-row justify-evenly my-3 tracking-wide">
-        <Link to="/help">
-          <li>HELP</li>
-        </Link>
-        <Link to="/contact">
-          <li>CONTACT</li>
-        </Link>
-        <Link to="/about">
-          <li>ABOUT</li>
-        </Link>
-        <Link to="/careers">
-          <li>CAREERS</li>
-        </Link>
-        <Link to="/terms">
-          <li>TERMS</li>
-        </Link>
-        <Link to="/teams">
-          <li>TEAMS</li>
-        </Link>
+        <li>
+          <Link to="/help">HELP</Link>
+        </li>
+        <li>
+          <Link to="/contact">CONTACT</Link>
+        </li>
+        <li>
+          <Link to="/about">ABOUT</Link>
+        </li>
+        <li>
+          <Link to="/careers">CAREERS</Link>
+        </li>
+        <li>
+          <Link to="/terms">TERMS</Link>
+        </li>
+        <li>
+          <Link to="/teams">TEAMS</Link>
+        </li>
       </ul>
     </footer>
   );
 }
 
 export default Footer;
+

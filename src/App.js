@@ -2,7 +2,6 @@ import Home from "./pages/Home";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
-import Account from "./pages/Account";
 import Health from "./pages/Health";
 import LifeStyle from "./pages/LifeStyle";
 import Travel from "./pages/Travel";
@@ -20,6 +19,9 @@ import About from "../src/components/Footer-Components/footerComponents/About";
 import Careers from "../src/components/Footer-Components/footerComponents/Careers/Careers";
 import Terms from "../src/components/Footer-Components/footerComponents/Terms";
 import Teams from "../src/components/Footer-Components/footerComponents/Teams";
+import MyPosts from "./pages/MyPosts";
+import AuthorPage from "./pages/AuthorPage";
+// import FooterRoutes from "./components/Footer-Components/FooterRoutes";
 
 function App() {
   return (
@@ -34,10 +36,10 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route
-              path="/account"
+              path="/myposts"
               element={
                 <ProtectedRoute>
-                  <Account />
+                  <MyPosts />
                 </ProtectedRoute>
               }
             />
@@ -60,6 +62,8 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/teams" element={<Teams />} />
+            <Route path="/authorPage/:id" element={<AuthorPage />} />
+            {/* <Route path="/footer/*" element={<FooterRoutes/>}/> */}
           </Routes>
         </AuthContextProvider>
         <Footer />
