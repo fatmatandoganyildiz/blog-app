@@ -30,7 +30,7 @@ function Travel() {
       }
     };
     getPosts()
-  }, [postsCollectionRef]);
+  }, []);
 
   return (
     <div className="mx-16 my-16">
