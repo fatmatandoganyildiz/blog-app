@@ -19,7 +19,7 @@ import About from "../src/components/Footer-Components/footerComponents/About";
 import Careers from "../src/components/Footer-Components/footerComponents/Careers/Careers";
 import Terms from "../src/components/Footer-Components/footerComponents/Terms";
 import Teams from "../src/components/Footer-Components/footerComponents/Teams";
-import MyPosts from "./pages/MyPosts";
+import MyPosts from "./admin/MyPosts";
 import AuthorPage from "./pages/AuthorPage";
 // import FooterRoutes from "./components/Footer-Components/FooterRoutes";
 

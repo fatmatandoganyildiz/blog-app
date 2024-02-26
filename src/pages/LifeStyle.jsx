@@ -1,40 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { db, storage } from "../firebase";
-import { getDownloadURL, ref } from "firebase/storage";
+import { usePostContext } from "../context/PostContext";
 
 function LifeStyle() {
-  const [postList, setPostList] = useState([]);
-  const postsCollectionRef = collection(db, "posts");
+  const { postList, getPostsByCategory} = usePostContext();
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const data = await getDocs(
-          query(
-            postsCollectionRef,
-            where("categories", "array-contains", "Life-Style")
-          )
-        );
-        const posts = await Promise.all(
-          data.docs.map(async (doc) => {
-            const postData = doc.data();
-            const imageUrl = await getDownloadURL(ref(storage, postData.image));
-            return {
-              ...postData,
-              id: doc.id,
-              imageUrl,
-            };
-          })
-        );
-
-        setPostList(posts);
-      } catch (error) {
-        console.error("Error getting posts: ", error);
-      }
-    };
-    getPosts();
+    getPostsByCategory("Life-Style")
   }, []);
 
   return (
