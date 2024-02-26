@@ -4,34 +4,33 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 
-function Health() {
+function Travel() {
   const [postList, setPostList] = useState([]);
   const postsCollectionRef = collection(db, "posts");
 
-  const getPosts = async () => {
-    try {
-      const data = await getDocs(query(postsCollectionRef, where("categories", "array-contains", "Travel")));
-      const posts = await Promise.all(
-        data.docs.map(async (doc) => {
-          const postData = doc.data();
-          const imageUrl = await getDownloadURL(ref(storage, postData.image));
-          return {
-            ...postData,
-            id: doc.id,
-            imageUrl,
-          };
-        })
-      );
-
-      setPostList(posts);
-    } catch (error) {
-      console.error("Error getting posts: ", error);
-    }
-  };
-
   useEffect(() => {
-    getPosts();
-  }, []);
+    const getPosts = async () => {
+      try {
+        const data = await getDocs(query(postsCollectionRef, where("categories", "array-contains", "Travel")));
+        const posts = await Promise.all(
+          data.docs.map(async (doc) => {
+            const postData = doc.data();
+            const imageUrl = await getDownloadURL(ref(storage, postData.image));
+            return {
+              ...postData,
+              id: doc.id,
+              imageUrl,
+            };
+          })
+        );
+  
+        setPostList(posts);
+      } catch (error) {
+        console.error("Error getting posts: ", error);
+      }
+    };
+    getPosts()
+  }, [postsCollectionRef]);
 
   return (
     <div className="mx-16 my-16">
@@ -65,4 +64,4 @@ function Health() {
   );
 }
 
-export default Health;
+export default Travel;
