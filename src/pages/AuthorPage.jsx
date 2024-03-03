@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { getDocs, collection, query, where, doc } from "firebase/firestore";
+import React, { useEffect } from "react";
+import { getDocs, collection, query, where } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { usePostContext } from "../context/PostContext";
+import Pagination from "../components/Pagination";
 
 function AuthorPage() {
   let { id } = useParams();
-
-  const [postLists, setPostList] = useState([]);
+  const { setPostList, displayCategoryPosts, pageCount, changePage } =
+    usePostContext();
   const postsCollectionRef = collection(db, "posts");
 
   useEffect(() => {
@@ -48,29 +50,8 @@ function AuthorPage() {
         Welcome to the Author's Page, {id}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center p-8">
-        {postLists.map((post) => (
-          <div
-            className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
-            key={post.id}
-          >
-            <Link to={`/article/${post.id}`}>
-              <img
-                className="w-full h-48 object-cover"
-                src={post.imageUrl}
-                alt={post.title}
-              />
-              <div className="p-4">
-                <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-                <p className="text-gray-700">
-                  {post.postText.slice(0, 100)}...
-                </p>
-                <div className="mt-4 flex justify-between items-center">
-                  <span className="text-gray-600">{post.author.name}</span>
-                </div>
-              </div>
-            </Link>
-          </div>
-        ))}
+        {displayCategoryPosts}
+        <Pagination pageCount={pageCount} changePage={changePage} />
       </div>
     </div>
   );

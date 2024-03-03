@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, auth, storage } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { VscAdd } from "react-icons/vsc";
-// import { useClickAway } from "@uidotdev/usehooks";
 
 function Write() {
   const [file, setFile] = useState(null);
@@ -13,13 +11,6 @@ function Write() {
   const [postText, setPostText] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-
-  // const ref = useRef();
-
-  // useClickAway(ref, () => {
-  //   setIsOpen(false);
-  // });
 
   let navigate = useNavigate();
 
@@ -73,6 +64,12 @@ function Write() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+
+    if (!title || !postText || categories.length === 0 || !file) {
+      alert("Please fill out all fields.");
+      console.log("alert cikmasi");
+      return;
+    }
     try {
       if (file) {
         await uploadFile();
@@ -80,7 +77,6 @@ function Write() {
       resetForm();
       navigate("/");
       console.log("Document added successfully");
-      // setFile(null)
     } catch (err) {
       console.log(err);
     }
@@ -94,27 +90,18 @@ function Write() {
     setCategories([]);
   };
 
-  const handleIcon = () => {
-    setIsOpen(true);
-  };
-
   return (
     <div className="container mx-auto my-8">
       <h1 className="text-3xl font-semibold mb-4">Tell Your Story</h1>
       <form onSubmit={handleAdd} className="space-y-4">
         <div className="relative">
           <input
-            // ref={ref}
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            onClick={handleIcon}
             className="w-full px-4 py-2 border-none focus:outline-none rounded-md"
           />
-          {/* {isOpen && (
-            <VscAdd className="absolute top-1/2 transform -translate-y-1/2 right-3 text-pink-500" />
-          )} */}
         </div>
         <div className="">
           <textarea

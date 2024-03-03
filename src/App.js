@@ -21,7 +21,6 @@ import Terms from "../src/components/Footer-Components/footerComponents/Terms";
 import Teams from "../src/components/Footer-Components/footerComponents/Teams";
 import MyPosts from "./admin/MyPosts";
 import AuthorPage from "./pages/AuthorPage";
-// import FooterRoutes from "./components/Footer-Components/FooterRoutes";
 
 function App() {
   return (
@@ -63,7 +62,6 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/authorPage/:id" element={<AuthorPage />} />
-            {/* <Route path="/footer/*" element={<FooterRoutes/>}/> */}
           </Routes>
         </AuthContextProvider>
         <Footer />

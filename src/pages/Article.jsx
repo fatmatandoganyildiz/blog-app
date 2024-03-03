@@ -14,7 +14,7 @@ function Article() {
         const docRef = doc(db, "posts", `${params.id}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
+          // console.log("Document data:", docSnap.data());
           setPost(docSnap.data());
         } else {
           console.log("No such document!");

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function ModalPage() {
   const [showModal, setShowModal] = useState(false);
-  // const[signUpPage, setSignUpPage] = useState(false);
 
   const handleClick = () => {
     setShowModal(true);

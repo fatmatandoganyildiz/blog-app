@@ -54,7 +54,7 @@ const LogIn = () => {
               type="password"
               autoComplete="password"
             />
-            <button className="rounded bg-blue-500 text-white font-semibold py-2">
+            <button disabled={!email || !password} className="rounded bg-blue-500 text-white font-semibold py-2">
               Sign In
             </button>
             <div className="flex justify-between items-center text-sm my-2 text-gray-800">
