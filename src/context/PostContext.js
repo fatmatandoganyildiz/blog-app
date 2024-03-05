@@ -10,8 +10,9 @@ const PostContext = createContext();
 export function PostContextProvider({ children }) {
   const [postList, setPostList] = useState([]);
   const [pageNumber, setPageNumber] = useState([]);
+  const postsCollectionRef = collection(db, "posts");
 
-  const postPerPage = 9;
+  const postPerPage = 12;
   const pageVisited = pageNumber * postPerPage;
   const pageCount = Math.ceil(postList.length / postPerPage);
 
@@ -22,29 +23,29 @@ export function PostContextProvider({ children }) {
   const displayCategoryPosts = postList
     .slice(pageVisited, pageVisited + postPerPage)
     .map((post) => {
-      return(
+      return (
         <div
-        className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
-        key={post.id}
-      >
-        <Link to={`/article/${post.id}`}>
-          <img
-            className="w-full h-48 object-cover"
-            src={post.imageUrl}
-            alt={post.title}
-          />
-          <div className="p-4">
-            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-gray-700">{post.postText.slice(0, 100)}...</p>
-            <div className="mt-4 flex justify-between items-center">
-              <span className="text-gray-600">{post.author.name}</span>
+          className="bg-white rounded-md overflow-hidden shadow-md transition-transform transform hover:scale-105"
+          key={post.id}
+        >
+          <Link to={`/article/${post.id}`}>
+            <img
+              className="w-full h-48 object-cover"
+              src={post.imageUrl}
+              alt={post.title}
+            />
+            <div className="p-4">
+              <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
+              <p className="text-gray-700">{post.postText.slice(0, 100)}...</p>
+              <div className="mt-4 flex justify-between items-center">
+                <span className="text-gray-600">{post.author.name}</span>
+              </div>
             </div>
-          </div>
-        </Link>
-      </div>
-      ) 
+          </Link>
+        </div>
+      );
     });
-    
+
   const getPostsByCategory = async (category) => {
     try {
       const postsCollectionRef = collection(db, "posts");
@@ -82,7 +83,8 @@ export function PostContextProvider({ children }) {
         changePage,
         pageCount,
         pageVisited,
-        pageNumber
+        pageNumber,
+        postsCollectionRef,
       }}
     >
       {children}

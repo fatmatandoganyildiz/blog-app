@@ -15,9 +15,6 @@ function Contact() {
         <div className="absolute inset-0 bg-gray-300">
           <iframe
             className="h-screen w-full"
-            // frameborder="0"
-            // marginheight="0"
-            // marginwidth="0"
             title="map"
             src="https://maps.google.com/maps?width=100%&height=100%&hl=en&q=Adana+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
           ></iframe>
@@ -41,7 +38,7 @@ function Contact() {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-gray-300 focus:border-[#BE3726] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 placeholder="Your Email"
               />
             </div>
@@ -54,13 +51,13 @@ function Contact() {
                 value={message}
                 id="message"
                 name="message"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-gray-300 focus:border-[#BE3726] focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                 placeholder="Your Message"
               ></textarea>
             </div>
             <button
               onClick={handleClick}
-              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              className="text-white bg-[#BE3726] border-0 py-2 px-6 focus:outline-none hover:bg-[#aa2312] rounded text-lg"
             >
               Send
             </button>

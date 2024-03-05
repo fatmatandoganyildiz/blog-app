@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import {
   getDocs,
-  collection,
   query,
   where,
   doc,
@@ -14,10 +13,14 @@ import { usePostContext } from "../context/PostContext";
 import Pagination from "../components/Pagination";
 
 function MyPosts() {
-  const { pageNumber, postList, setPostList, pageCount, changePage } =
-    usePostContext();
-
-  const postsCollectionRef = collection(db, "posts");
+  const {
+    pageNumber,
+    postList,
+    setPostList,
+    pageCount,
+    changePage,
+    postsCollectionRef,
+  } = usePostContext();
 
   const currentUser = auth.currentUser;
   const currentUserUId = currentUser ? currentUser.uid : null;
@@ -32,8 +35,7 @@ function MyPosts() {
     }
     try {
       const data = await getDocs(
-        query(postsCollectionRef, where("author.id", "==", currentUserUId)),
-        console.log(currentUserUId)
+        query(postsCollectionRef, where("author.id", "==", currentUserUId))
       );
       const posts = await Promise.all(
         data.docs.map(async (doc) => {
@@ -95,7 +97,7 @@ function MyPosts() {
   const handleDelete = async (id) => {
     const post = doc(db, "posts", id);
     deleteDoc(post);
-    setPostList(postLists.filter((post) => post.id !== id));
+    setPostList(postList.filter((post) => post.id !== id));
   };
 
   return (

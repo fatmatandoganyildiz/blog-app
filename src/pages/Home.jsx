@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
-import { db, storage } from "../firebase";
+import { getDocs } from "firebase/firestore";
+import { storage } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
-// import { usePostContext } from "../context/PostContext";
+import { usePostContext } from "../context/PostContext";
 
 function Home() {
-  // const {  pageCount, changePage } =
-  // usePostContext();
-  const [postLists, setPostList] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
-  const postsCollectionRef = collection(db, "posts");
+  const {
+    // pageNumber,
+    // setPageNumber,
+    postList,
+    setPostList,
+    postsCollectionRef,
+  } = usePostContext();
+  
+  const [pageNumber, setPageNumber] = useState([]);
 
   const postsPerPage = 12;
   const pageVisited = pageNumber * postsPerPage;
-  const pageCount = Math.ceil(postLists.length / postsPerPage);
+  const pageCount = Math.ceil(postList.length / postsPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
-  const displayPosts = postLists
+  const displayPosts = postList
     .slice(pageVisited, pageVisited + postsPerPage)
     .map((post) => {
       return (

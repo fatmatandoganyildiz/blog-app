@@ -31,7 +31,7 @@ function Careers() {
                 </div>
 
                 <div className="p-6">
-                  <h6 className="mb-4 block font-sans text-base font-semibold uppercase leading-relaxed tracking-normal text-pink-500 antialiased">
+                  <h6 className="mb-4 block font-sans text-base font-semibold uppercase leading-relaxed tracking-normal text-[#BE3726] antialiased">
                     {career.MainHeader}
                   </h6>
                   <h4 className="mb-2 block font-sans text-2xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
@@ -42,7 +42,7 @@ function Careers() {
                   </p>
                   <a className="inline-block" href="#">
                     <button
-                      className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                      className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-[#BE3726] transition-all hover:bg-pink-500/10 active:bg-[#aa2312] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                       type="button"
                     >
                       Learn More

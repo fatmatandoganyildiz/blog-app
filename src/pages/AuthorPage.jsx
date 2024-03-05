@@ -8,9 +8,9 @@ import Pagination from "../components/Pagination";
 
 function AuthorPage() {
   let { id } = useParams();
-  const { setPostList, displayCategoryPosts, pageCount, changePage } =
+  const { setPostList, displayCategoryPosts, pageCount, changePage,postsCollectionRef } =
     usePostContext();
-  const postsCollectionRef = collection(db, "posts");
+  // const postsCollectionRef = collection(db, "posts");
 
   useEffect(() => {
     const getPosts = async () => {

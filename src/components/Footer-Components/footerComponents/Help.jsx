@@ -11,9 +11,9 @@ import { helpContent } from "../../../store/footerContents";
 
   return (
     <div>
-      <div className="w-full h-2/6 flex font-light tracking-widest items-center justify-center flex-col py-40 bg-gradient-to-r from-violet-500 to-fuchsia-500">
+      <div className="w-full h-2/6 flex font-light tracking-widest items-center justify-center flex-col py-40 bg-gradient-to-r from-[#BE3726] to-fuchsia-500">
     
-        <h1 className="text-[60px]">How can we help?</h1>
+        <h1 className="text-[60px] text-white">How can we help?</h1>
         <form
           onSubmit={handleFormSubmit}
           className="w-2/4 flex items-center justify-center"

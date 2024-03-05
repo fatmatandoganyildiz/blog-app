@@ -11,13 +11,13 @@ function Write() {
   const [postText, setPostText] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
+  // const [postId, setPostId] = useState(null);
 
   let navigate = useNavigate();
 
   const uploadFile = async () => {
     const newFileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, `image/${newFileName}`);
-
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
@@ -43,7 +43,7 @@ function Write() {
       async () => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          await addDoc(collection(db, "posts"), {
+          const docRef = await addDoc(collection(db, "posts"), {
             title,
             postText,
             categories,
@@ -54,7 +54,8 @@ function Write() {
               timeStamp: serverTimestamp(),
             },
           });
-          console.log("Document added successfully");
+          // setPostId(docRef.id);
+          console.log("Document added successfully", docRef.id);
         } catch (error) {
           console.error("Error adding document: ", error);
         }
@@ -64,10 +65,8 @@ function Write() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-
     if (!title || !postText || categories.length === 0 || !file) {
       alert("Please fill out all fields.");
-      console.log("alert cikmasi");
       return;
     }
     try {
@@ -76,7 +75,6 @@ function Write() {
       }
       resetForm();
       navigate("/");
-      console.log("Document added successfully");
     } catch (err) {
       console.log(err);
     }

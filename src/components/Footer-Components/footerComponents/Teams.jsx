@@ -20,7 +20,7 @@ function Teams() {
             {teams.map((t, title) => (
               <div
                 key={title}
-                class="flex flex-col items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-pink-500 rounded-xl"
+                class="flex flex-col items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-[#BE3726] rounded-xl"
               >
                 <img
                   class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300"
@@ -71,7 +71,7 @@ function Teams() {
                     href="#"
                     class="mx-2 text-gray-600 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-300 group-hover:text-white"
                     aria-label="Github"
-                    >
+                  >
                     <svg
                       class="w-6 h-6 fill-current"
                       viewBox="0 0 24 24"

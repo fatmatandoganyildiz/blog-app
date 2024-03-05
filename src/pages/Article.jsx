@@ -8,19 +8,17 @@ function Article() {
   const [post, setPost] = useState({});
 
   useEffect(() => {
-    
     const fetchData = async () => {
       if (params.id) {
         const docRef = doc(db, "posts", `${params.id}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          // console.log("Document data:", docSnap.data());
           setPost(docSnap.data());
         } else {
           console.log("No such document!");
         }
-      }else{
-        console.log("Makale bulunamadi")
+      } else {
+        console.log("Makale bulunamadi");
       }
     };
 
@@ -38,7 +36,12 @@ function Article() {
         {post?.author?.name && (
           <h2 className="font-serif flex">
             <p className="font-semibold">Author: </p>
-            <Link to={`/authorPage/${post.author.id}`} className="hover:underline ml-2">{post.author.name}</Link>
+            <Link
+              to={`/authorPage/${post.author.id}`}
+              className="hover:underline ml-2"
+            >
+              {post.author.name}
+            </Link>
           </h2>
         )}
         <div className="mt-6">

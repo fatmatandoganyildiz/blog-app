@@ -15,7 +15,7 @@ function Pagination({ pageCount, changePage }) {
         previousLinkClassName={"bg-gray-200 rounded-md px-3 py-1 mr-2"}
         nextLinkClassName={"bg-gray-200 rounded-md px-3 py-1 ml-2"}
         disabledClassName={"opacity-50 cursor-not-allowed"}
-        activeClassName={"bg-pink-500 text-white px-3 mx-1 py-1 rounded-md"}
+        activeClassName={"bg-[#BE3726] text-white px-3 mx-1 py-1 rounded-md"}
       />
     </div>
   );
