@@ -5,22 +5,22 @@ function Footer() {
   return (
     <footer className="fixed bottom-0 w-full bg-white">
       <ul className="flex flex-row justify-evenly my-3 tracking-wide">
-        <li>
+        <li className="hover:text-[#aa2312] ">
           <Link to="/help">HELP</Link>
         </li>
-        <li>
+        <li className="hover:text-[#aa2312]">
           <Link to="/contact">CONTACT</Link>
         </li>
-        <li>
+        <li className="hover:text-[#aa2312]">
           <Link to="/about">ABOUT</Link>
         </li>
-        <li>
+        <li className="hover:text-[#aa2312]">
           <Link to="/careers">CAREERS</Link>
         </li>
-        <li>
+        <li className="hover:text-[#aa2312]">
           <Link to="/terms">TERMS</Link>
         </li>
-        <li>
+        <li className="hover:text-[#aa2312]">
           <Link to="/teams">TEAMS</Link>
         </li>
       </ul>
@@ -29,4 +29,3 @@ function Footer() {
 }
 
 export default Footer;
-

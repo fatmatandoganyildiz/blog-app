@@ -9,7 +9,7 @@ const PostContext = createContext();
 
 export function PostContextProvider({ children }) {
   const [postList, setPostList] = useState([]);
-  const [pageNumber, setPageNumber] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
   const postsCollectionRef = collection(db, "posts");
 
   const postPerPage = 12;
@@ -20,7 +20,7 @@ export function PostContextProvider({ children }) {
     setPageNumber(selected);
   };
 
-  const displayCategoryPosts = postList
+  const displayPosts = postList
     .slice(pageVisited, pageVisited + postPerPage)
     .map((post) => {
       return (
@@ -45,7 +45,7 @@ export function PostContextProvider({ children }) {
         </div>
       );
     });
-
+ 
   const getPostsByCategory = async (category) => {
     try {
       const postsCollectionRef = collection(db, "posts");
@@ -79,7 +79,7 @@ export function PostContextProvider({ children }) {
         postList,
         setPostList,
         getPostsByCategory,
-        displayCategoryPosts,
+        displayPosts,
         changePage,
         pageCount,
         pageVisited,

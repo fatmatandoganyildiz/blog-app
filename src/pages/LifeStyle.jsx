@@ -5,7 +5,7 @@ import Pagination from "../components/Pagination";
 function LifeStyle() {
   const {
     getPostsByCategory,
-    displayCategoryPosts,
+    displayPosts,
     pageCount,
     changePage,
   } = usePostContext();
@@ -16,11 +16,11 @@ function LifeStyle() {
 
   return (
     <div className="mx-16 my-16">
-      <h1 className="text-center my-16 text-6xl font-extralight tracking-widest">
+      <h1 className="text-center my-16 text-5xl font-extralight tracking-widest">
         LIFE-STYLE
       </h1>
       <div className="my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center p-8">
-        {displayCategoryPosts}
+        {displayPosts}
         <Pagination pageCount={pageCount} changePage={changePage} />
       </div>
     </div>

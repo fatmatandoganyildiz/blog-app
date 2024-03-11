@@ -3,7 +3,7 @@ import { careers } from "../../../../store/footerContents";
 
 function Careers() {
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="flex items-center justify-center">
         <div className="my-10 w-full max-w-screen-2xl">
           <h1 className="text-[54px] flex justify-center font-extralight tracking-widest ">
@@ -16,7 +16,7 @@ function Careers() {
             growing team. Uncover the possibilities and embark on a fulfilling
             career journey with us.
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 ">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             {careers.map((career, index) => (
               <div
                 key={index}

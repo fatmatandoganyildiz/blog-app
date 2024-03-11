@@ -1,11 +1,5 @@
-import React, { useEffect} from "react";
-import {
-  getDocs,
-  query,
-  where,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import React, { useEffect } from "react";
+import { getDocs, query, where, doc, deleteDoc } from "firebase/firestore";
 import { db, storage, auth } from "../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import { Link } from "react-router-dom";
@@ -27,6 +21,10 @@ function MyPosts() {
 
   const postsPerPage = 12;
   const pageVisited = pageNumber * postsPerPage;
+
+  useEffect(() => {
+    getPosts(currentUserUId);
+  }, [currentUserUId]);
 
   const getPosts = async (currentUserUId) => {
     if (!currentUserUId) {
@@ -54,11 +52,7 @@ function MyPosts() {
     }
   };
 
-  useEffect(() => {
-    getPosts(currentUserUId);
-  }, [currentUserUId]);
-
-  const displayPosts = postList
+  const displayMyPosts = postList
     .slice(pageVisited, pageVisited + postsPerPage)
     .map((post) => {
       return (
@@ -82,10 +76,10 @@ function MyPosts() {
           </Link>
           <div className="absolute bottom-2 right-2">
             <button
-              className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-300"
               onClick={() => {
                 handleDelete(post.id);
               }}
+              className="flex items-center bg-[#BE3726] text-white gap-1 px-4 py-2 cursor-pointer font-semibold tracking-widest rounded-md hover:bg-[#aa2312] duration-300 hover:gap-2 hover:translate-x-3"
             >
               Delete
             </button>
@@ -102,11 +96,11 @@ function MyPosts() {
 
   return (
     <div className="mx-16 my-16">
-      <h1 className="text-center my-16 text-6xl font-extralight tracking-widest">
+      <h1 className="text-center my-16 text-5xl font-extralight tracking-widest">
         MY POSTS
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center p-8">
-        {displayPosts}
+        {displayMyPosts}
         <Pagination pageCount={pageCount} changePage={changePage} />
       </div>
     </div>

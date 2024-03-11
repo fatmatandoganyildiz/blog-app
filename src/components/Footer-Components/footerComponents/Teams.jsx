@@ -3,9 +3,8 @@ import { teams } from "../../../store/footerContents";
 
 function Teams() {
   return (
-    <div>
       <section class="bg-white dark:bg-gray-900">
-        <div class="container px-6 py-10 mx-auto">
+        <div class="container mx-auto">
           <h1 className="text-[54px] font-extralight  text-center tracking-widest ">
             Our Executive Team
           </h1>
@@ -87,7 +86,6 @@ function Teams() {
           </div>
         </div>
       </section>
-    </div>
   );
 }
 

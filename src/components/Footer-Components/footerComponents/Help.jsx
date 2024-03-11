@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import { helpContent } from "../../../store/footerContents"; 
- 
- function Help() {
+import { helpContent } from "../../../store/footerContents";
+import SearchLogo from "../../../assets/images/Search_transparent.png";
+
+function Help() {
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setSearchTerm("");
   };
 
   return (
-    <div>
-      <div className="w-full h-2/6 flex font-light tracking-widest items-center justify-center flex-col py-40 bg-gradient-to-r from-[#BE3726] to-fuchsia-500">
-    
-        <h1 className="text-[60px] text-white">How can we help?</h1>
+    <div className="container mx-auto">
+      <div className="flex items-center justify-center">
+        <img src={SearchLogo} alt="Search Logo" className="h-58 w-72" />
         <form
           onSubmit={handleFormSubmit}
           className="w-2/4 flex items-center justify-center"
         >
-          <div className="w-full h-auto p-5 rounded-3xl bg-white">
+          <div className="w-full h-auto p-5 rounded-3xl bg-white border-b border-b-[#be3726] flex z-10">
             <section className="w-full h-10 flex items-center">
               <span className="w-7 h-full"></span>
               <input
-                placeholder="Search..."
+                placeholder="Search something..."
                 className="w-full h-full font-medium md:pl-2 focus:outline-none"
                 type="text"
                 value={searchTerm}
