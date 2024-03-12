@@ -3,7 +3,7 @@ import { careers } from "../../../../store/footerContents";
 
 function Careers() {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mb-12">
       <div className="flex items-center justify-center">
         <div className="my-10 w-full max-w-screen-2xl">
           <h1 className="text-[54px] flex justify-center font-extralight tracking-widest ">

@@ -8,7 +8,7 @@ import Pagination from "../components/Pagination";
 
 function AuthorPage() {
   let { id } = useParams();
-  const { setPostList, displayCategoryPosts, pageCount, changePage,postsCollectionRef } =
+  const { setPostList, displayPosts, pageCount, changePage,postsCollectionRef } =
     usePostContext();
 
   useEffect(() => {
@@ -45,10 +45,10 @@ function AuthorPage() {
   return (
     <div className="mx-16 my-16">
       <h1 className="text-center my-16 text-5xl font-light tracking-wide">
-        Welcome to the Author's Page, {id}
+        Welcome to the Author's Page
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-center p-8">
-        {displayCategoryPosts}
+        {displayPosts}
         <Pagination pageCount={pageCount} changePage={changePage} />
       </div>
     </div>

@@ -6,13 +6,10 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function Write() {
   const [file, setFile] = useState(null);
-  const [images, setImages] = useState({ img: null });
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  // const [postId, setPostId] = useState(null);
-
   let navigate = useNavigate();
 
   const uploadFile = async () => {
@@ -54,7 +51,6 @@ function Write() {
               timeStamp: serverTimestamp(),
             },
           });
-          // setPostId(docRef.id);
           console.log("Document added successfully", docRef.id);
         } catch (error) {
           console.error("Error adding document: ", error);
@@ -82,7 +78,6 @@ function Write() {
 
   const resetForm = () => {
     setFile(null);
-    setImages({ img: null });
     setTitle("");
     setPostText("");
     setCategories([]);
@@ -90,23 +85,25 @@ function Write() {
 
   return (
     <div className="container mx-auto my-8">
-      <h1 className="text-3xl font-semibold mb-4">Tell Your Story</h1>
+      <h1 className="text-[54px] flex justify-center font-extralight tracking-widest ">
+        Tell Your Story
+      </h1>
       <form onSubmit={handleAdd} className="space-y-4">
-        <div className="relative">
+        <div>
           <input
             type="text"
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border-none focus:outline-none rounded-md"
+            className="w-full px-4 py-2  border-b border-b-[#be3726] rounded-md focus:outline-none"
           />
         </div>
-        <div className="">
+        <div>
           <textarea
             placeholder="Your Story"
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
-            className="w-full h-48 px-4 py-2 border-none focus:outline-none rounded-md resize-none"
+            className="w-full h-48 px-4 py-2 border-b border-b-[#be3726] rounded-md resize-none focus:outline-none"
           />
         </div>
 
@@ -124,7 +121,7 @@ function Write() {
                   ])
                 }
               />
-              <span className="text-blue-500 font-semibold">Life-Style</span>
+              <span className=" font-semibold">Life-Style</span>
             </label>
             <label className="inline-flex items-center space-x-2">
               <input
@@ -137,7 +134,7 @@ function Write() {
                   ])
                 }
               />
-              <span className="text-green-500 font-semibold">Travel</span>
+              <span className=" font-semibold">Travel</span>
             </label>
             <label className="inline-flex items-center space-x-2">
               <input
@@ -150,7 +147,7 @@ function Write() {
                   ])
                 }
               />
-              <span className="text-yellow-500 font-semibold">Health</span>
+              <span className=" font-semibold">Health</span>
             </label>
           </div>
         </div>
@@ -159,7 +156,7 @@ function Write() {
           <input
             type="file"
             onChange={(event) => setFile(event.target.files[0])}
-            className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+            className="w-full  border-b border-b-[#be3726] rounded-md py-2 px-4 focus:outline-none "
           />
         </div>
         <button

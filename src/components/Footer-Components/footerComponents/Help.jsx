@@ -11,7 +11,7 @@ function Help() {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto mb-12">
       <div className="flex items-center justify-center">
         <img src={SearchLogo} alt="Search Logo" className="h-58 w-72" />
         <form

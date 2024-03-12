@@ -9,8 +9,7 @@ import { GoChevronUp } from "react-icons/go";
 
 function Terms() {
   return (
-    <div className="my-6">
-      <div className="container px-6 py-10 mx-auto ">
+      <div className="container px-6 py-10 mx-auto mb-12">
         <h1 className="text-[54px] font-extralight text-center tracking-widest ">
           Terms and Conditions
         </h1>
@@ -153,7 +152,6 @@ function Terms() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

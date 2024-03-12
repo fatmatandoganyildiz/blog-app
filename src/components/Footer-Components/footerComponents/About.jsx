@@ -5,7 +5,7 @@ function About() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="container mx-auto px-6 py-10 mb-12">
       <h1 className="text-[54px] font-extralight text-center tracking-widest ">
         About us
       </h1>
@@ -15,7 +15,7 @@ function About() {
             <Tab.List className="my-6 text-2xl font-thin flex justify-evenly">
               <Tab
                 className={`${
-                  activeTab === 0 ? "border-b-2 border-[#BE3726]" : ""
+                  activeTab === 0 ? "outline-none border-b-2 border-[#BE3726]" : ""
                 }`}
                 onClick={() => setActiveTab(0)}
               >
@@ -23,7 +23,7 @@ function About() {
               </Tab>
               <Tab
                 className={`${
-                  activeTab === 1 ? "border-b-2 border-[#BE3726]" : ""
+                  activeTab === 1 ? "outline-none border-b-2 border-[#BE3726]" : ""
                 }`}
                 onClick={() => setActiveTab(1)}
               >
@@ -31,7 +31,7 @@ function About() {
               </Tab>
               <Tab
                 className={`${
-                  activeTab === 2 ? "border-b-2 border-[#BE3726]" : ""
+                  activeTab === 2 ? "outline-none border-b-2 border-[#BE3726]" : ""
                 }`}
                 onClick={() => setActiveTab(2)}
               >
